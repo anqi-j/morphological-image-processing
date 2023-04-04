@@ -1,12 +1,12 @@
 # morphological-image-processing
 
-![LiDAR example](figure/LiDAR_example.png)
+![Morphological Segmentation](figure/LiDAR_thresholding_counting_watershed.png)
 
 ## Table of contents
 
-- data: pilot data file
-- figure: images and plots
-- plot: code for visualizing data
+- data: LiDAR images of sieved rocks and pre-sieved rocks
+- figure: visualization of data, analysis, and illustration of the pipeline
+- clean: segment rocks and extract features from each region
 
 ## Function / purpose
 
@@ -16,17 +16,29 @@ During drilling, the size and shape of the rock chips removed from the well can 
 
 ## Data preprocessing
 
-The laser detector generates $(X,Y,Z)$ data with a resolution of 1 $mm$. In the pilot data, each row represents a 3D point at the surface of rocks, with Cartesian coordinate $(X,\textbf{Z}, \textbf{Y})$.
+The laser detector generates three-dimensional data with a resolution of 1 $mm$. We have transformed it into images with $(X,Y)$-coordinates embedded as pixel location, and $Z$ as the pixel values.
 
-We plan to label rock samples by sieving them into several size classes in the lab. Then we pass them through the laser detector. We will extract features from segmented images as independent variables. Some considerations:
+We sieved the rock samples into several size classes in the lab:
 
-- Circumference
+- "12": 5/8 inches >= rock size > 1/2 inches
+- "58": 3/4 inches >= rock size > 5/8 inches
+- "34": rock size > 3/4 inches
+
+We extracted the following features from segmented images with intensity information. For more details, see the official documentation.
+
+- Orientation
+- Perimeter
 - Area
-- Long axis length
-- Short axis length
-- Maximal height
-- Average height
-- Magnitude of gradient at the maximal height
+- Length of the major axis
+- Length of the minor axis
+- Mean height
+- Median height
+- Max height
+- Standard deviation of height
+- Mean gradient
+- Standard deviation of gradient
+- Gradient at the max height
+- First 4 weighted Hu moments
 
 <!--
 
@@ -40,12 +52,6 @@ We plan to label rock samples by sieving them into several size classes in the l
 
 - Anqi Zhang: anqizhang@utexas.edu
 - Santiago Callerio: scallerio@utexas.edu
-- Justin Lerma: justin.lerma01@utexas.edu
-
-## Reference
-
-- Thurley, Matthew J. "Automated online measurement of limestone particle size distributions using 3D range data." Journal of Process Control 21.2 (2011): 254-262.
-- Engin, Irfan C., and Norbert H. Maerz. "Size distribution analysis of aggregates using LiDAR scan data and an alternate algorithm." *Measurement* 143 (2019): 136-143.
 
 ## License
 
